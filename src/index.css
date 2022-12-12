@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    footer ul li {
+      @apply font-[400] text-[clamp(12px,0.9221902017291066vw,16px)] leading-[26px] cursor-pointer;
+    }
+  }
+
+*{
+    font-family: 'Monda', sans-serif;
+}
+html {
+  --scrollbarBG: #ebebeb;
+  --thumbBG: rgb(251, 74, 4);
+}
+body::-webkit-scrollbar {
+  width: 13px;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  margin: 0;
+  padding: 0;
+
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+.backgroundImage{
+    /* background-image: url("./assets/backgroundimage.png"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.contactusBackgroundImage{
+    background-image: url("./assets/contactMain.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.helpSubBackgroundImage{
+    background-image: url("./assets/helpsubMain.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.creatorDashboardProfileBacgroundImage{
+    background-image: url("./assets/creator-dashboard.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.inputBackground{
+  background-image: url("./assets/searchIcon.png");
+  background-repeat: no-repeat;
+  background-position: 1.383vw center;
+}
+
+.eventsMainBackground{
+  background-image: url("./assets/main.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.eventTextFont{
+  font-family: 'Rubik Wet Paint', cursive;
+}
+
+.eventDivBoxShadow{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.authBackground{
+  background-image: url("./assets/AuthBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.authFliterEffect{
+  background: rgba(254, 254, 254, 0.15);
+}
+
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboardBackground{
+  background-image: url("./assets/dashboardImage.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.navActive{
+  border-bottom: "1px solid #473a3a";
+  background-color: white;
+}
