@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../General/Button'
 import { Link } from "react-router-dom";
 import LazyImage from '../General/LazyImage';
 import { motion } from 'framer-motion';
-
+import axios from 'axios'
 type Props = {}
 
 export default function Login({ }: Props) {
-    return (
+        const [user, setUser] = useState({
+          email: '',
+          password: ''
+        })
+      
+        let name, value;
+        const inputhandler = (e) => {
+          name = e.target.name;
+          value = e.target.value;
+          setUser({
+            ...user, [name]: value
+          })
+        }
+
+        const CheckUser = async (e) => {
+            e.preventDefault();
+            const userData = await axios.post('http://localhost:8000/Account/logIn', user);
+            const LogInUser ={
+                name : userData.data.data.email,
+                password: userData.data.data.password
+            }
+
+            localStorage.setItem("authenticatedUser", JSON.stringify(LogInUser));
+            
+        }
+        return (
         <section className='w-[calc(100vw - 100%)] h-[100vh] flex xsm:flex-col sm:flex-col'>
             <div className='authBackground flex-1 flex justify-center items-center py-[60px]'>
                 <div className='authFliterEffect rounded-[50px] w-[39.76945244956772vw] xsm:min-w-[80vw] sm:min-w-[60vw] h-[331px] flex justify-center items-center ml-[-45px] xsm:ml-0 sm:ml-0 pl-[4.14985590778098vw]'>
@@ -26,11 +51,11 @@ export default function Login({ }: Props) {
                     <form className='mt-[25px]'>
                         <div>
                             <label className='font-[400] text-[clamp(12px,0.9221902017291066vw,16px)] leading-[26.06px] text-[#473a3a] ' style={{fontWeight:'600'}}>Email</label>
-                            <input className='w-[27.608069164265128vw] xsm:min-w-full sm:min-w-full h-[50px] block rounded-[10px] border-[1px] border-[#473a3a]' style={{padding:"0 10px"}}/>
+                            <input className='w-[27.608069164265128vw] xsm:min-w-full sm:min-w-full h-[50px] block rounded-[10px] border-[1px] border-[#473a3a]' style={{padding:"0 10px"}} name='email' onChange={inputhandler} value={user.email}/>
                         </div>
                         <div className='mt-[15px]'>
                             <label className='font-[400] text-[clamp(12px,0.9221902017291066vw,16px)] leading-[26.06px] text-[#473a3a] ' style={{fontWeight:'600'}}>Password</label>
-                            <input className='w-[27.608069164265128vw] xsm:min-w-full sm:min-w-full h-[50px] block rounded-[10px] border-[1px] border-[#473a3a]' style={{padding:"0 10px"}}/>
+                            <input className='w-[27.608069164265128vw] xsm:min-w-full sm:min-w-full h-[50px] block rounded-[10px] border-[1px] border-[#473a3a]' style={{padding:"0 10px"}} name='password' onChange={inputhandler} value={user.password}/>
                             <div className='flex justify-between mt-[19px]'>
                                 <div className='flex gap-[10px]'>
                                     <input type={"checkbox"} />
@@ -41,9 +66,9 @@ export default function Login({ }: Props) {
                         </div>
 
                         <div className='flex flex-col xsm:items-center'>
-                            <Link to={"/dashboard"}>
-                                <Button whileHover={{ background: "#fff", border: "3px solid #FB4A04", color: "#FB4A04" }} width="27.608069164265128vw" height='57px' text="LogIn" style={{ background: "#FB4A04", color: "#fff", marginTop: "25px", minWidth: "100%" }} />
-                            </Link>
+                            {/* <Link to={"/dashboard"}> */}
+                                <Button whileHover={{ background: "#fff", border: "3px solid #FB4A04", color: "#FB4A04" }} width="27.608069164265128vw" height='57px' text="LogIn" style={{ background: "#FB4A04", color: "#fff", marginTop: "25px", minWidth: "100%" }} onClick={CheckUser}/>
+                            {/* </Link> */}
                             <Link to={"/signup"} className="min-w-[100%]">
                                 <Button whileHover={{ background: "#FB4A04", border: "3px solid #FB4A04", color: "#fff" }} width="27.608069164265128vw" height='57px' text="SignUp" style={{ background: "#fff", color: "#FB4A04", border: "1px solid #473a3a", marginTop: "20px", minWidth: "100%" }} />
                             </Link>

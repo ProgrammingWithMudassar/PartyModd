@@ -15,7 +15,7 @@ app.use('/Account',AccountRoute);
 
 //Port on that server will run
 const port = process.env.PORT || 8000;
-
+//https://cloud.mongodb.com/v2/6398bc525f969e01efec3653#metrics/replicaSet/6398bc93ea3998513d0f8a04/explorer/MartyMood/userdatas/find
 const URL = "mongodb+srv://Admin:Admin@cluster0.vl9gnuf.mongodb.net/MartyMood?retryWrites=true&w=majority";
 
 mongoose.connect(URL,{
@@ -28,10 +28,6 @@ mongoose.connect(URL,{
     console.log(`Somthing went wrong ${error}`);
   });
 
-
-// app.get('/',(req,res)=>{
-//     res.send("This is route.")
-// })
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
