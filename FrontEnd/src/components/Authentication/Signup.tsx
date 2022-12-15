@@ -70,9 +70,9 @@ export default function Signup({ }: Props) {
                             </div>
                         </div>
 
-                        {/* <Link to="/interests"> */}
-                        <Button whileHover={{ background: "#fff", border: "3px solid #FB4A04", color: "#FB4A04" }} width="27.608069164265128vw" height='57px' text="SignUp" style={{ background: "#FB4A04", color: "#fff", marginTop: "25px", minWidth: "100%" }} onClick={addNewUser} />
-                        {/* </Link> */}
+                        <Link to="/interests">
+                        <Button whileHover={{ background: "#fff", border: "3px solid #FB4A04", color: "#FB4A04" }} width="27.608069164265128vw" height='57px' text="SignUp" style={{ background: "#FB4A04", color: "#fff", marginTop: "25px", minWidth: "100%" }}  />
+                        </Link>
 
                         <div className='flex justify-between items-center mt-[37px]'>
                             <div className='min-w-[8.247838616714697vw] bg-[#e0e0e0] h-[1px]'> </div>

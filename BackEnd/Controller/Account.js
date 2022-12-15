@@ -4,7 +4,6 @@ import UserModel from '../Model/UserModel.js'
 export const Register = async (req, res) => {
     const { name, email, password } = req.body;
     try {
-
         let oldUser = await UserModel.findOne({ email });
         if (oldUser) res.status(400).json({ message: "User is already exist...!!!" });
 
