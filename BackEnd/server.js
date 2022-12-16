@@ -5,17 +5,13 @@ const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
 
-
 //passport setup
 require('./Utils/SocialAuth')
-require("./Utils/LocalPassportConfig")
+require('./middlewares/passport')(passport);
 
-
-
-//225000
 //Routing 
 const SocialAuth = require("./Routes/SociaLAuth")
-const userRoute = require("./Routes/User")
+const userRoute = require("./Routes/UserRoute")
 
 //Creating App
 const app = express();
@@ -31,18 +27,9 @@ app.use(passport.initialize())
 app.use(passport.session()); 
  
 app.use('/auth',SocialAuth)
-app.use('/api/auth',userRoute)
+app.use('/api/users',userRoute)
 
 //CookieSession Settings -> this is only for social auth
-
-
-
-
-
-
-
-
-
 
 //Port on that server will run
 const port = process.env.PORT || 8000;
