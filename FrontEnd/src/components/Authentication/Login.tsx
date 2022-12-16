@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import axios from 'axios'
 type Props = {}
 
+
+
 export default function Login({ }: Props) {
         const [user, setUser] = useState({
           email: '',
@@ -32,6 +34,11 @@ export default function Login({ }: Props) {
             localStorage.setItem("authenticatedUser", JSON.stringify(LogInUser));
             
         }
+
+        const loginAsGoogle = () => {
+            window.open("http://localhost:8000/auth/google", "_self");
+          };
+
         return (
         <section className='w-[calc(100vw - 100%)] h-[100vh] flex xsm:flex-col sm:flex-col'>
             <div className='authBackground flex-1 flex justify-center items-center py-[60px]'>
@@ -83,7 +90,7 @@ export default function Login({ }: Props) {
                             <motion.div whileHover={{ scale: 1.05 }} className='rounded-[10px] flex justify-center items-center w-[102px] h-[78px] border-[1px] border-[#D9D9D9]'>
                                 <LazyImage alt="" src="/facebook.png" />
                             </motion.div>
-                            <motion.div whileHover={{ scale: 1.05 }} className='rounded-[10px] flex justify-center items-center w-[102px] h-[78px] border-[1px] border-[#D9D9D9]'>
+                            <motion.div whileHover={{ scale: 1.05 }} onClick={loginAsGoogle} className='rounded-[10px] cursor-auto flex justify-center items-center w-[102px] h-[78px] border-[1px] border-[#D9D9D9]'>
                                 <LazyImage alt="" src="/google.png" />
                             </motion.div>
                             <motion.div whileHover={{ scale: 1.05 }} className='rounded-[10px] flex justify-center items-center w-[102px] h-[78px] border-[1px] border-[#D9D9D9]'>

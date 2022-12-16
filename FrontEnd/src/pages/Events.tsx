@@ -5,7 +5,7 @@ import Button from '../components/General/Button'
 import SearchBar from '../components/General/SearchBar'
 import { Link } from "react-router-dom"
 import LazyImage from '../components/General/LazyImage'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 import './Style.css'
 
@@ -333,9 +333,59 @@ const Style = {
     }
 }
 
+interface User {
+
+}
+
+declare function fetch(input: RequestInfo, init?: RequestInit): Promise<Response>;
+
+interface RequestInit {
+  headers?: HeadersInit;
+  // other options
+}
+
+type HeadersInit = Headers | string[][] | Record<string, string>;
+
 export default function Events({ }: Props) {
 
     const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
+
+    const [users, setUsers] = useState<User[]>([]);
+
+    // useEffect(() => {
+
+    //     const getUserData =  () => {
+
+
+    //         fetch("http://localhost:8000/auth/protected", {
+    //             method: "GET",
+    //             credentials: "include",
+    //             headers: {
+    //               Accept: "application/json",
+    //               "Content-Type": "application/json",
+    //               "Access-Control-Allow-Credentials": true,
+    //             },
+    //           })
+    //             .then((response) => {
+    //               if (response.status === 200) return response.json();
+    //               throw new Error("authentication has been failed!");
+    //             })
+    //             .then((resObject) => {
+    //                 setUsers(resObject);
+    //             })
+    //             .catch((err) => {
+    //               console.log(err);
+    //             });
+
+    //     }
+
+
+    //     getUserData()
+
+    // }, [])
+
+    // console.log(users)
+    
 
     return (
         <div className='w-[calc(100vw - 100%)] ' >

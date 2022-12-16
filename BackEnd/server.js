@@ -1,29 +1,42 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import morgan from 'morgan'
-import cookieSession from 'cookie-session';
-import passport from 'passport';
+const mongoose = require('mongoose');
+const morgan = require('morgan')
+const session = require('express-session');
+const express = require('express') 
+const cors = require('cors')
+const passport = require('passport')
+
 
 //passport setup
 require('./Utils/SocialAuth')
+require("./Utils/LocalPassportConfig")
+
+
 
 //225000
 //Routing 
-import AccountRoute from './Routes/AccuontsRoutes.js'
+const SocialAuth = require("./Routes/SociaLAuth")
+const userRoute = require("./Routes/User")
 
 //Creating App
 const app = express();
 app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
+
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use('/Account', AccountRoute);
+
+// app.use(cookieSession({ name: "session", keys: ["anysecretkeyulike"], maxAge: 24 * 60 * 60 * 100 }))
+app.use(session({ secret: 'anyyyyyything', resave: false, saveUninitialized: true }));
+app.use(passport.initialize())
+app.use(passport.session()); 
+ 
+app.use('/auth',SocialAuth)
+app.use('/api/auth',userRoute)
 
 //CookieSession Settings -> this is only for social auth
-app.use(cookieSession({ name: "session", keys: ["anysecretkeyulike"], maxAge: 24 * 60 * 60 * 100 }))
-app.use(passport.initialize())
-app.use(passport.session());
+
+
+
 
 
 

@@ -1,11 +1,16 @@
-import UserModel from '../Model/UserModel.js'
-
+const UserModel = require('../Model/userModel')
 //New User Register Api
-export const Register = async (req, res) => {
-    const { name, email, password } = req.body;
+const Register = async (req, res) => {
     try {
+
+        console.log("TEST",req.body)
+
+        const { name, email, password } = req.body;
+
         let oldUser = await UserModel.findOne({ email });
-        if (oldUser) res.status(400).json({ message: "User is already exist...!!!" });
+        if (oldUser) {
+            return res.status(400).json({ message: "User is already exist...!!!" });
+        }
 
         const savedUserData = await UserModel.create({
             name, email, password
@@ -17,7 +22,7 @@ export const Register = async (req, res) => {
 }
 
 //LogIn Api
-export const LogIn = async (req, res) => {
+const LogIn = async (req, res) => {
     try {
         const { email,password } = req.body;
         const user = await UserModel.findOne({ email , password});
@@ -28,3 +33,10 @@ export const LogIn = async (req, res) => {
         res.status(500).send("something went wrong")
     }
 }
+
+const Test = async (req, res)=>{
+    res.send("hi")
+
+}
+
+module.exports= {Register, LogIn, Test}
