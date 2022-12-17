@@ -5,6 +5,7 @@ const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
 
+
 //Routing 
 const SocialAuth = require("./Routes/SociaLAuth")
 const userRoute = require("./Routes/UserRoute")
@@ -23,7 +24,8 @@ app.use(passport.initialize())
 app.use(passport.session()); 
  
 //passport setup
-require('./Utils/SocialAuth');
+require('./Utils/FacebookAuth')
+require('./Utils/GoogleAuth');
 require('./Utils/LocalAuth');
 require('./Utils/Serializer');
 

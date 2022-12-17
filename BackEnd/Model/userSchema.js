@@ -15,6 +15,16 @@ const userSchema = Schema({
         type: String,
         require: true 
     },
+    provider:{
+        type: String,
+        require: true 
+
+    },
+    picture:{
+        type: String,
+        require: true 
+
+    }
 },
 { timestamps: true }
 )
