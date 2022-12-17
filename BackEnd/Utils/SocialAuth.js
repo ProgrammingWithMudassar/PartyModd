@@ -12,13 +12,7 @@ passport.use(new GoogleStrategy({
 
 },
 function(request, accessToken, refreshToken, profile, done) {
+  console.log("imp")
   return done(null, profile);
 }));
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});

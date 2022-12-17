@@ -1,10 +1,13 @@
-const serializeUser = user =>{
-    return{
-        _id : user.id,
-        displayName: user.displayName,
-        email: user.email,
-        profilePicture: user.profilePicture
-    }
-}
+const passport = require('passport');
 
-module.exports = serializeUser
+passport.serializeUser(function(user, done) {
+    console.log("Serialize User...", user)
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    console.log("Deseriallize User...")
+  
+    done(null, user);
+  });
+  

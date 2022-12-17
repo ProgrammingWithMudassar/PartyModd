@@ -13,12 +13,13 @@ router.get('/google',
 
 router.get('/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:5173/',
+        successRedirect: 'auth/login/success',
+        // successRedirect: 'http://localhost:5173/',
         failureRedirect: '/auth/google/failure'
     })
 );
 
-router.get('/protected', isLoggedIn, (req, res) => {
+router.get('/login/success', isLoggedIn, (req, res) => {
     if (req.user) {
         res.status(200).json({
             success: true,

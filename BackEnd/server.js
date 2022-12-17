@@ -5,10 +5,6 @@ const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
 
-//passport setup
-require('./Utils/SocialAuth')
-require('./middlewares/passport')(passport);
-
 //Routing 
 const SocialAuth = require("./Routes/SociaLAuth")
 const userRoute = require("./Routes/UserRoute")
@@ -26,9 +22,13 @@ app.use(session({ secret: 'anyyyyyything', resave: false, saveUninitialized: tru
 app.use(passport.initialize())
 app.use(passport.session()); 
  
+//passport setup
+require('./Utils/SocialAuth')
+require('./Utils/LocalAuth')
+
 app.use('/auth',SocialAuth)
 app.use('/api/users',userRoute)
-
+const events = require('./Model/eventsSchema')
 //CookieSession Settings -> this is only for social auth
 
 //Port on that server will run
