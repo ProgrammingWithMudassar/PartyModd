@@ -23,8 +23,9 @@ app.use(passport.initialize())
 app.use(passport.session()); 
  
 //passport setup
-require('./Utils/SocialAuth')
-require('./Utils/LocalAuth')
+require('./Utils/SocialAuth');
+require('./Utils/LocalAuth');
+require('./Utils/Serializer');
 
 app.use('/auth',SocialAuth)
 app.use('/api/users',userRoute)
