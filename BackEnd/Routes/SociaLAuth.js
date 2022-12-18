@@ -2,10 +2,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const baseUrl = process.env.BASE_URL || `http://localhost:8000`
-
-function isLoggedIn(req, res, next) {
-    req.user ? next() : res.sendStatus(401);
-}
+const AuthGuard = require('../middleware/AuthGuard')
 // -----------------------------------------------------------
 // --------------------Google Auth Router---------------------
 // -----------------------------------------------------------
@@ -22,7 +19,7 @@ router.get('/google/callback',
     })
 );
 
-router.get('/login/success', isLoggedIn, (req, res) => {
+router.get('/login/success', AuthGuard, (req, res) => {
     if (req.user) {
         res.status(200).json({
             success: true,
