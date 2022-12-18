@@ -29,6 +29,9 @@ require('./Utils/GoogleAuth');
 require('./Utils/LocalAuth');
 require('./Utils/Serializer');
 
+app.get('/', (req, res)=>{
+  res.send("Welcome to Party Modd Server...")
+})
 app.use('/auth',SocialAuth)
 app.use('/api/users',userRoute)
 const events = require('./Model/eventsSchema')
@@ -50,6 +53,8 @@ mongoose.connect(URL, {
   });
 
 
+const baseUrl = process.env.BASE_URL || `http://localhost:8000`
+
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on ${baseUrl}`);
 });

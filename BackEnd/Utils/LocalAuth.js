@@ -1,5 +1,5 @@
 const passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy;
+LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../Model/userSchema')
 

@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 const passport = require('passport');
-const CLIENT_URL = "http://localhost:5173/"
+const baseUrl = process.env.BASE_URL || `http://localhost:8000`
 
 function isLoggedIn(req, res, next) {
     req.user ? next() : res.sendStatus(401);
@@ -16,7 +16,7 @@ router.get('/google',
 
 router.get('/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:8000/auth/login/success',
+        successRedirect: `${baseUrl}/auth/login/success`,
         // successRedirect: 'http://localhost:5173/',
         failureRedirect: '/auth/google/failure'
     })
@@ -46,9 +46,7 @@ router.get('/logout', (req, res) => {
 // -----------------------------------------------------------
 // --------------------Facebook Auth Router-------------------
 // -----------------------------------------------------------
-router.get('/facebook',
-    passport.authenticate('facebook'
-    ));
+router.get('/facebook', passport.authenticate('facebook'));
 
 router.get('/facebook/callback',
     passport.authenticate('facebook', {
@@ -57,6 +55,7 @@ router.get('/facebook/callback',
         failureRedirect: '/auth/faccebook/failure'
     })
 );
+
 router.get('/auth/facebook/failure', (req, res) => {
     res.send('Failed to authenticate..');
 });

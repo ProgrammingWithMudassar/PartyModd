@@ -3,6 +3,7 @@ const router = express.Router()
 const passport = require('passport');
 const User = require('../Model/userSchema')
 
+const baseUrl = process.env.BASE_URL || "http://localhost:8000"
 
 router.post('/register', async (req, res) => {
     try {
@@ -30,7 +31,7 @@ router.post('/login',
     passport.authenticate('local'),
     async (req, res) => {
         console.log("Working?")
-        res.redirect('http://localhost:8000/auth/login/success')
+        res.redirect(`${baseUrl}/auth/login/success`)
     })
 
 router.get('/logout', (req, res) => {

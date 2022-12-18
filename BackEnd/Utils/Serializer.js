@@ -12,15 +12,10 @@ passport.serializeUser(async function (user, done) {
 
         return done(null, user)
 
-
-
     } catch (err) {
         return done(null, err)
 
     }
-
-
-
 });
 
 passport.deserializeUser(function (user, done) {
