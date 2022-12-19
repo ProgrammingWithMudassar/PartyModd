@@ -9,6 +9,7 @@ const passport = require('passport')
 //Routing 
 const SocialAuth = require("./Routes/SociaLAuth")
 const userRoute = require("./Routes/UserRoute")
+const EventsRoute = require("./Routes/EventsRoute")
 
 //Creating App
 const app = express();
@@ -32,15 +33,19 @@ require('./Utils/Serializer');
 app.get('/', (req, res)=>{
   res.send("Welcome to Party Modd Server...")
 })
-app.use('/auth',SocialAuth)
-app.use('/api/users',userRoute)
-const events = require('./Model/eventsSchema')
+app.use('/auth',SocialAuth);
+app.use('/api/users',userRoute);
+app.use('/events/',EventsRoute);
 //CookieSession Settings -> this is only for social auth
 
 //Port on that server will run
 const port = process.env.PORT || 8000;
 //https://cloud.mongodb.com/v2/6398bc525f969e01efec3653#metrics/replicaSet/6398bc93ea3998513d0f8a04/explorer/MartyMood/userdatas/find
 const URL = "mongodb+srv://Admin:Admin@cluster0.vl9gnuf.mongodb.net/MartyMood?retryWrites=true&w=majority";
+
+
+app.use('/storage', express.static('Storage'));
+
 
 mongoose.connect(URL, {
   useNewUrlParser: true,
