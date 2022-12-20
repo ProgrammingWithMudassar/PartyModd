@@ -3,6 +3,10 @@ const mongoose = require('mongoose')
 const { Schema, model } = mongoose;
 
 const eventsSchema = Schema({
+    status: {
+        type: String,
+        require: true,
+    },
     title: {
         type: String,
         require: true,
@@ -42,7 +46,8 @@ const eventsSchema = Schema({
         type: Array
     },
     TicketId: {
-        type: String,
+        type: Array,
+        default: [],
         requrie: true
     },
     eventView: {

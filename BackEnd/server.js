@@ -5,11 +5,11 @@ const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
 
-
 //Routing 
-const SocialAuth = require("./Routes/SociaLAuth")
-const userRoute = require("./Routes/UserRoute")
-const EventsRoute = require("./Routes/EventsRoute")
+const SocialAuth = require("./Routes/SociaLAuth");
+const userRoute = require("./Routes/UserRoute");
+const EventsRoute = require("./Routes/EventsRoute");
+const TicketsRoute = require("./Routes/TicketRoute");
 
 //Creating App
 const app = express();
@@ -35,7 +35,8 @@ app.get('/', (req, res)=>{
 })
 app.use('/auth',SocialAuth);
 app.use('/api/users',userRoute);
-app.use('/events/',EventsRoute);
+app.use('/events',EventsRoute);
+app.use('/tickets', TicketsRoute);
 //CookieSession Settings -> this is only for social auth
 
 //Port on that server will run
@@ -43,9 +44,14 @@ const port = process.env.PORT || 8000;
 //https://cloud.mongodb.com/v2/6398bc525f969e01efec3653#metrics/replicaSet/6398bc93ea3998513d0f8a04/explorer/MartyMood/userdatas/find
 const URL = "mongodb+srv://Admin:Admin@cluster0.vl9gnuf.mongodb.net/MartyMood?retryWrites=true&w=majority";
 
-
 app.use('/storage', express.static('Storage'));
 
+app.get('/storage/*', function (req, res) {
+  res.sendFile(__dirname+'/public/error.html');
+})
+app.get('*', function (req, res) {
+  res.sendFile(__dirname+'/public/error.html');
+})
 
 mongoose.connect(URL, {
   useNewUrlParser: true,

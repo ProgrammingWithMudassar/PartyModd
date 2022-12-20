@@ -1,25 +1,31 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
 const ticketsSchema = Schema({
-    type: {
+    ticketImg: {
+        type:String,
+        require: true,
+
+    },
+    ticketType: {
         type: String,
         require: true,
         default: "Paid"
     },
-    name: {
+    ticketName: {
         type: String,
         requrie: true
     },
     section: {
-        type: String
+        type: String,
+        require: true,
     },
     promoCode: {
         type: String
     },
     quantity: {
-        type: Number
+        type: String
     },
     price: {
         type: String,
