@@ -33,9 +33,8 @@ router.post('/create-ticket/:eventId', upload.fields([
         promoCode,
         quantity,
         price,
-        startDate,
-        endDate,
-        eventsID: EventParamsID
+        eventsID: EventParamsID,
+
     })
     if (ticketCreated) {
 
