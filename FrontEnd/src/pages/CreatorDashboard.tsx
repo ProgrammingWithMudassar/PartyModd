@@ -6,6 +6,10 @@ import LazyImage from '../components/General/LazyImage'
 import SearchBar from '../components/General/SearchBar'
 import {motion} from 'framer-motion'
 import {Link} from 'react-router-dom'
+
+import { useAuth } from '../Context/AuthProvider';
+
+
 type Props = {}
 
 const data = [
@@ -24,11 +28,13 @@ const data = [
 ]
 
 export default function CreatorDashboard({ }: Props) {
+    const { user} = useAuth()
+
     return (
         <Layout>
             <div className='w-full pt-[65px] ml-[12.968299711815561vw] xsm:ml-[4vw] sm:ml-[6vw] flex gap-[7.089337175792507vw] xsm:flex-col sm:flex-col'>
                 <div>
-                    <h1 className='font-[700] text-[clamp(20px,2.07492795389049vw,36px)] leading-[58px] text-[#473a3a] ml-[10px]'>Welcome, <span className='text-[#FB4A04]'>Partymode</span></h1>
+                    <h1 className='font-[700] text-[clamp(20px,2.07492795389049vw,36px)] leading-[58px] text-[#473a3a] ml-[10px]'>Welcome, <span className='text-[#FB4A04]'> {user.user.username} </span></h1>
                     <div className='border-2 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[20px] w-[52.04610951008645vw] xsm:w-[90%] sm:w-[80%] px-[21px] divide-y-2 mt-[99px]'>
                         <div className='mb-[40px]'>
                             <h2 className='font-[700] text-[clamp(16px,1.38328530259366vw,24px)] leading-[39px] text-[#473a3a] mt-[12px]'>Your event checklist</h2>
@@ -80,9 +86,9 @@ export default function CreatorDashboard({ }: Props) {
                 </div>
                 <div className='w-[20.230547550432277vw] xsm:w-[90%] sm:w-[80%] pt-[160px] xsm:pt-[0px] sm:pt-[0px] flex flex-col xsm:items-center sm:items-center'>
                     <div className='flex justify-center items-center flex-col h-[363px] border-2 border-[#D9D9D9] rounded-tl-[20px] rounded-tr-[20px] w-[20.230547550432277vw] xsm:w-[90%] sm:w-[80%]'>
-                        <LazyImage src='profilePic.png' classes='mt-[51px]' />
+                    <img className="w-30 h-30 rounded-full" src={user.user.picture} alt={user.user.username}/>
                         <div className='w-full'>
-                            <h3 className='mt-[43px] mb-[53px] text-center font-[400] text-[clamp(16px,1.38328530259366vw,24px)] leading-[39.09px] text-[#473a3a]'>Partymode</h3>
+                            <h3 className='mt-[43px] mb-[53px] text-center font-[400] text-[clamp(16px,1.38328530259366vw,24px)] leading-[39.09px] text-[#473a3a]'>{user.user.username}</h3>
                             <div className='flex justify-around w-[70%] m-auto mb-[54px] xsm:flex-col xsm:items-center'>
                                 <motion.p whileHover={{color:"#FB4A04"}} className='cursor-pointer font-[400] text-[14px] leading-[22.9px] text-[#1977F3]'>View</motion.p>
                                 <motion.p whileHover={{color:"#FB4A04"}} className='cursor-pointer font-[400] text-[14px] leading-[22.9px] text-[#1977F3]'>Edit </motion.p>

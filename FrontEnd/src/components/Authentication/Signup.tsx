@@ -4,6 +4,9 @@ import LazyImage from '../General/LazyImage'
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import { useNavigate } from "react-router-dom";
+
 type Props = {}
 
 
@@ -12,23 +15,29 @@ export default function Signup({ }: Props) {
     const [user, setUser] = useState({
         name: '', email: '', password: ''
     })
+    const navigate = useNavigate();
+
+
+    console.log("Input Field", user)
 
     let name, value;
-    const inputhandler = (e) => {
+    const inputhandler = (e : any) => {
         name = e.target.name;
         value = e.target.value;
         setUser({
             ...user, [name]: value
         })
     }
-    const addNewUser = async (e) => {
+    const registerUser = async (e : any) => {
         e.preventDefault();
-        const userData = await axios.post('http://localhost:8000/Account/Register', user)
+        const userData = await axios.post('http://localhost:8000/api/users/register', user)
         .then(()=>{
-            alert("Your reigster Successfully.");
+            alert("You'r reigstered Successfully.");
+            navigate("/login");
+
         })
         .catch((error)=>{
-            alert(error.response.data.message)
+            alert(error)
         })
 
 
@@ -70,9 +79,9 @@ export default function Signup({ }: Props) {
                             </div>
                         </div>
 
-                        <Link to="/interests">
-                        <Button whileHover={{ background: "#fff", border: "3px solid #FB4A04", color: "#FB4A04" }} width="27.608069164265128vw" height='57px' text="SignUp" style={{ background: "#FB4A04", color: "#fff", marginTop: "25px", minWidth: "100%" }}  />
-                        </Link>
+                        {/* <Link to="/interests"> */}
+                        <Button onClick={registerUser} whileHover={{ background: "#fff", border: "3px solid #FB4A04", color: "#FB4A04" }} width="27.608069164265128vw" height='57px' text="SignUp" style={{ background: "#FB4A04", color: "#fff", marginTop: "25px", minWidth: "100%" }}  />
+                        {/* </Link> */}
 
                         <div className='flex justify-between items-center mt-[37px]'>
                             <div className='min-w-[8.247838616714697vw] bg-[#e0e0e0] h-[1px]'> </div>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import OrderRow from '../EventDescriptions/OrderRow'
 import Button from '../General/Button'
 import SearchBar from '../General/SearchBar'
 import TableRow from './TableRow'
 import TableRowOrder from './TableRowOrder'
 import {motion} from "framer-motion"
+import axios from 'axios'
 
 type Props = {}
 
@@ -32,7 +33,27 @@ const data1:any=[
   {},
 ]
 
+
+
 export default function Orders({ }: Props) {
+  const [availOrders, setAvailOrders] = useState([]);
+
+
+useEffect(()=>{
+
+  const fetchOrders = async ()=>{
+   const resp =  await axios.get('http://localhost:8000/orders/all-orders')
+   setAvailOrders(resp.data)
+   
+
+
+  }
+  fetchOrders()
+
+},[])
+
+
+
   return (
     <div>
       <div className='flex gap-[20px] xsm:flex-col sm:flex-col mb-[121px]'>
@@ -57,7 +78,7 @@ export default function Orders({ }: Props) {
       </div>
 
       <div className='divide-y-2 w-[78.55907780979827vw] flex flex-col xsm:min-w-[240px]'>
-        {data1.map((d:any)=>{
+        {availOrders.map((d:any)=>{
           return(
             <OrderRow data={d}/>
           )

@@ -5,25 +5,36 @@ const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
 
+// const cookieSession = require("cookie-session");
+
+
 //Routing 
 const SocialAuth = require("./Routes/SociaLAuth");
 const userRoute = require("./Routes/UserRoute");
 const EventsRoute = require("./Routes/EventsRoute");
 const TicketsRoute = require("./Routes/TicketRoute");
+const StripeRoute = require("./Routes/Stripe")
+const OrdersRoute = require("./Routes/OrdersRoute");
+
 
 //Creating App
 const app = express();
 app.use(morgan("dev"));
-app.use(cors({ origin: "*" }));
 
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // app.use(cookieSession({ name: "session", keys: ["anysecretkeyulike"], maxAge: 24 * 60 * 60 * 100 }))
-app.use(session({ secret: 'anyyyyyything', resave: false, saveUninitialized: true }));
+app.use(session({ secret: 'anyyyyyything', resave: false, saveUninitialized: false }));
 app.use(passport.initialize())
 app.use(passport.session()); 
- 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 //passport setup
 require('./Utils/FacebookAuth')
 require('./Utils/GoogleAuth');
@@ -37,6 +48,12 @@ app.use('/auth',SocialAuth);
 app.use('/api/users',userRoute);
 app.use('/events',EventsRoute);
 app.use('/tickets', TicketsRoute);
+app.use('/stripe', StripeRoute);
+app.use('/orders', OrdersRoute);
+
+app.get('/testget', (req,res)=>{
+  res.status(200).json({ testData: true, message: "meow ", })
+})
 //CookieSession Settings -> this is only for social auth
 
 //Port on that server will run
@@ -62,7 +79,6 @@ mongoose.connect(URL, {
   }).catch((error) => {
     console.log(`Somthing went wrong ${error}`);
   });
-
 
 const baseUrl = process.env.BASE_URL || `http://localhost:8000`
 

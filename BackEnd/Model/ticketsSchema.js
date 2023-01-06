@@ -24,9 +24,7 @@ const ticketsSchema = Schema({
     promoCode: {
         type: String
     },
-    quantity: {
-        type: String
-    },
+
     price: {
         type: String,
     },

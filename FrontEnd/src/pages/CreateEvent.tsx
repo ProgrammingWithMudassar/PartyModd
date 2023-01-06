@@ -4,10 +4,17 @@ import LazyImage from '../components/General/LazyImage'
 import { motion } from "framer-motion"
 import SearchBar from '../components/General/SearchBar'
 
+import { useAuth } from '../Context/AuthProvider';
+import { useEvent } from '../Context/EventProvider';
+import { useParams } from 'react-router-dom';
+
 type Props = {}
 
 export default function CreateEvent({ }: Props) {
     const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
+    const {user} = useAuth();
+    // const {eventID} = useEvent();
+    const {eventID} = useParams();
 
     return (
         <div>
@@ -31,8 +38,8 @@ export default function CreateEvent({ }: Props) {
                         </li>
                     </Link>
                     <li className='flex items-center gap-[8px]'>
-                        <img src='./profile.png' alt='' />
-                        <motion.p whileHover={{ color: "#FB4A04" }} className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center'>partymode@gmail.com</motion.p>
+                    <img className="w-10 h-10 rounded-full" src={user?.user?.picture} alt={user?.user?.username}/>
+                        <motion.p whileHover={{ color: "#FB4A04" }} className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center'>{user?.user?.email}</motion.p>
                     </li>
                 </ul>
             </nav>
@@ -42,33 +49,35 @@ export default function CreateEvent({ }: Props) {
                         <p className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center'>Back</p>
                     </li>
                     <li className='flex items-center gap-[8px]'>
-                        <img src='./profile.png' alt='' />
-                        <p className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center'>partymode@gmail.com</p>
+                    <img className="w-10 h-10 rounded-full" src={user?.user.picture} alt={user?.user.username}/>
+                        <p className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center'>{user?.user.email}</p>
                     </li>
                 </ul>
             }
 
             <nav className='w-full h-[63px] bg-[#FB4A04]'>
                 <ul className='flex gap-[3.0547550432276656vw] items-center justify-center h-full'>
-                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={'/create-event'}>
+                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={`/create-event/basic-info/${eventID}`}>
                         <li className='font-[400] text-[15px] xsm:text-[8px] leading-[24.43px] text-[#FFFFFF]'>Basic Info </li>
                     </NavLink>
-                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={'/create-event/detail'}>
+                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={`/create-event/detail/${eventID}`}>
                         <li className='font-[400] text-[15px] xsm:text-[8px] leading-[24.43px] text-[#FFFFFF]'>Details</li>
                     </NavLink>
-                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={'/create-event/online-page-event'}>
+                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={`/create-event/online-page-event/${eventID}`}>
                         <li className='font-[400] text-[15px] xsm:text-[8px] leading-[24.43px] text-[#FFFFFF]'>Online Event Page</li>
                     </NavLink>
-                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={'/create-event/create-ticket'}>
+                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={`/create-event/create-ticket/${eventID}`}>
                         <li className='font-[400] text-[15px] xsm:text-[8px] leading-[24.43px] text-[#FFFFFF]'>Ticket</li>
                     </NavLink>
-                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={'/create-event/publish'}>
+                    <NavLink end className={({ isActive }) => isActive ? "border-b-[2px] border-white p-[5px] transition-all" : "border-b-[2px] border-transparent p-[5px] transition-all"} to={`/create-event/publish/${eventID}`}>
                         <li className='font-[400] text-[15px] xsm:text-[8px] leading-[24.43px] text-[#FFFFFF]'>Publish</li>
                     </NavLink>
                 </ul>
             </nav>
 
+
             <Outlet></Outlet>
         </div>
     )
+
 }

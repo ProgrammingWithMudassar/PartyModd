@@ -22,16 +22,19 @@ type Props={
   classes?:string
 }
 
+
 export default function Crousal({ crousalData, settings,maxWidth,width,style, classes}: Props) {
     const slider1Arrow: any = useRef();
+
+    console.log(crousalData);
 
     return (
         <>
         <Slider {...settings}>
-          {crousalData.map((data:any)=>{
+          {crousalData?.map((data:any)=>{
                 return (
-                <motion.div whileHover={{scale:1.01}} key={data.id} className="shadow-md xsm:flex xsm:justify-center">
-                    <LazyImage alt="" src={data.image} style={{maxWidth ,width, ...style }} classes={classes}/>
+                <motion.div whileHover={{scale:1.01}}  className="shadow-md xsm:flex xsm:justify-center">
+                    <LazyImage alt="" src={`http://localhost:8000/storage/${data}`} style={{maxWidth ,width, ...style }} classes={classes}/>
                 </motion.div>)
             })}
         </Slider>

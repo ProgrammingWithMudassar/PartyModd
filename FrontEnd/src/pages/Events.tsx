@@ -9,37 +9,39 @@ import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 import './Style.css'
 
+import { ToastContainer } from 'react-toastify';
+
 type Props = {}
 
 export const data = [
     {
         image: "./image1.png",
         imageWidth: "20.576368876080693vw",
-        text: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
+        title: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
         description: "Thurs Oct 13 at 7:00pm EDT"
     },
     {
         image: "./image2.png",
         imageWidth: "20.576368876080693vw",
-        text: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
+        title: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
         description: "Thurs Oct 13 at 7:00pm EDT"
     },
     {
         image: "./image3.png",
         imageWidth: "20.576368876080693vw",
-        text: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
+        title: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
         description: "Thurs Oct 13 at 7:00pm EDT"
     },
     {
         image: "./image4.png",
         imageWidth: "20.576368876080693vw",
-        text: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
+        title: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
         description: "Thurs Oct 13 at 7:00pm EDT"
     },
     {
         image: "./image2.png",
         imageWidth: "20.576368876080693vw",
-        text: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
+        title: "Hush Haunt 2022 - Oct 13 Hush Haunted Attraction, Westland.",
         description: "Thurs Oct 13 at 7:00pm EDT"
     },
 ]
@@ -350,44 +352,13 @@ export default function Events({ }: Props) {
 
     const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
 
-    const [users, setUsers] = useState<User[]>([]);
 
-    // useEffect(() => {
-
-    //     const getUserData =  () => {
-
-
-    //         fetch("http://localhost:8000/auth/protected", {
-    //             method: "GET",
-    //             credentials: "include",
-    //             headers: {
-    //               Accept: "application/json",
-    //               "Content-Type": "application/json",
-    //               "Access-Control-Allow-Credentials": true,
-    //             },
-    //           })
-    //             .then((response) => {
-    //               if (response.status === 200) return response.json();
-    //               throw new Error("authentication has been failed!");
-    //             })
-    //             .then((resObject) => {
-    //                 setUsers(resObject);
-    //             })
-    //             .catch((err) => {
-    //               console.log(err);
-    //             });
-
-    //     }
-
-
-    //     getUserData()
-
-    // }, [])
-
-    // console.log(users)
-    
+  
 
     return (
+        <>
+        <ToastContainer/>
+        
         <div className='w-[calc(100vw - 100%)] ' >
             <nav className='fixed z-[1000] bg-[white] flex justify-between items-center w-[100%] xsm:flex-col' style={{ boxShadow: '0 0 5px 1px #919191', padding: '0 35px' }} >
                 <div className='flex items-center gap-[3.28vw] xsm:justify-between sm:justify-between xsm:w-full sm:w-full'>
@@ -518,5 +489,6 @@ export default function Events({ }: Props) {
                 <Footer />
             </div>
         </div>
+        </>
     )
 }

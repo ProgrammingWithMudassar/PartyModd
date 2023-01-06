@@ -10,16 +10,18 @@ const AuthGuard = require('../middleware/AuthGuard')
 // -----------------------------------------------------------
 
 router.get('/google',
-    passport.authenticate('google', { scope: ['email', 'profile'] }
-    ));
+    passport.authenticate('google', { scope: ["email", "profile"] }
+));
 
 router.get('/google/callback',
     passport.authenticate('google', {
-        successRedirect: `${baseUrl}/auth/login/success`,
-        // successRedirect: 'http://localhost:5173/',
+        // successRedirect: `${baseUrl}/auth/login/success`,
+        successRedirect: 'http://localhost:5173/dashboard',
         failureRedirect: '/auth/google/failure'
     })
 );
+
+
 
 router.get('/login/success', AuthGuard, (req, res) => {
     if (req.user) {
@@ -49,8 +51,8 @@ router.get('/facebook', passport.authenticate('facebook'));
 
 router.get('/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: 'http://localhost:8000/auth/login/success',
-        // successRedirect: 'http://localhost:5173/',
+        // successRedirect: 'http://localhost:8000/auth/login/success',
+        successRedirect: 'http://localhost:5173/dashboard',
         failureRedirect: '/auth/faccebook/failure'
     })
 );

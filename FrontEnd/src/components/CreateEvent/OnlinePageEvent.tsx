@@ -1,9 +1,18 @@
 import React from 'react'
 import Button from '../General/Button'
-
+import { useNavigate, useParams } from 'react-router-dom'
 type Props = {}
 
 export default function OnlinePageEvent({ }: Props) {
+    const {eventID} = useParams()
+    const navigate = useNavigate();
+
+    const handleSubmit = async () => {
+        navigate(`/create-event/create-ticket/${eventID}`)
+
+    }
+
+
     return (
         <div className='w-[58.96829971181556vw] sm:w-[80vw] xsm:w-[90vw] m-auto '>
             <div className='divide-y-2'>
@@ -44,7 +53,7 @@ export default function OnlinePageEvent({ }: Props) {
 
             <div className='ml-[75px] flex gap-[20px] justify-end mb-[203px] mt-[103px] sm:flex-col-reverse xsm:flex-col-reverse sm:items-center xsm:items-center sm:ml-0 xsm:ml-0'>
                 <Button whileHover={{background:"#FB4A04",color:"white",scale:1.03}} width='229px' height='65px' text='Back' style={{minWidth:"200px", background: "transparent", color: "#FB4A04", border: "1px solid #231414D4", borderRadius: "10px", fontSize: "24px", lineHeight: "39.09px" }} />
-                <Button  whileHover={{background:"white",color:"#FB4A04",scale:1.03,border:"1px solid #FB4A04"}} width='229px' height='65px' text='Save & Continue' style={{minWidth:"200px", borderRadius: "10px", fontSize: "24px", lineHeight: "39.09px" }} />
+                <Button  onClick={handleSubmit} whileHover={{background:"white",color:"#FB4A04",scale:1.03,border:"1px solid #FB4A04"}} width='229px' height='65px' text='Save & Continue' style={{minWidth:"200px", borderRadius: "10px", fontSize: "24px", lineHeight: "39.09px" }} />
             </div>
         </div>
     )

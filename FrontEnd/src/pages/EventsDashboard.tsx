@@ -1,13 +1,19 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import Layout from '../components/General/Layout'
 import {motion} from "framer-motion"
+import { useAuth } from '../Context/AuthProvider'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 type Props = {}
 
 export default function EventsDashboard({ }: Props) {
+
     return (
         <Layout>
+            <ToastContainer/>
             <div className='w-full pt-[65px] ml-[9.682997118155619vw] xsm:ml-[4vw] sm:ml-[6vw] md:ml-[7vw]'>
+
                 <h1 className='font-[700] text-[clamp(20px,2.07492795389049vw,36px)] leading-[58px] text-[#473a3a] ml-[10px]'>Events</h1>
 
                 <div className='transition-all flex gap-[20px] mt-[29px] mb-[84px]'>

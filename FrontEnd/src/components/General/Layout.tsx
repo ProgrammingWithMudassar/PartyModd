@@ -5,6 +5,7 @@ import SearchBar from './SearchBar'
 import { useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../Context/AuthProvider'
 
 type Props = {
     children: any
@@ -45,6 +46,9 @@ let drawer = [
 ]
 
 export default function Layout({ children }: Props) {
+
+    const {logout, user} = useAuth()
+
     const location = useLocation();
     const navigate=useNavigate();
     return (
@@ -61,8 +65,8 @@ export default function Layout({ children }: Props) {
 
                 <ul className='text-[#493c3c] text-[clamp(12px,0.9221902017291066vw,16px)] font-[700] flex gap-[31px] mr-[7.37vw] items-center border-[1px] px-[21px] py-[6px] rounded-full border-[#473a3a] '>
                     <li className='flex items-center gap-[8px]'>
-                        <img src='/profile.png' alt='' />
-                        <p className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center ml-[20px]'>partymode</p>
+                    <img className="w-10 h-10 rounded-full" src={user?.user.picture} alt={user?.user.username}/>
+                        <p className='text-[#473a3a] font-[700] text-[14px] leading-[23px] text-center ml-[20px]'> {user?.user.username} </p>
                         <img className='ml-[41px]' src='/dropdown.svg' alt='' />
                     </li>
                 </ul>
@@ -80,7 +84,7 @@ export default function Layout({ children }: Props) {
                             )
                         })}
                     </div>
-                    <div onClick={()=>navigate("/")} className='m-auto my-0 mb-[45px] cursor-pointer'>
+                    <div onClick={logout} className='m-auto my-0 mb-[45px] cursor-pointer'>
                         <img src='./log-out.svg' />
                     </div>
                 </div>
