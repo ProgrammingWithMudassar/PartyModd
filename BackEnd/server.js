@@ -58,8 +58,7 @@ app.get('/testget', (req,res)=>{
 
 //Port on that server will run
 const port = process.env.PORT || 8000;
-//https://cloud.mongodb.com/v2/6398bc525f969e01efec3653#metrics/replicaSet/6398bc93ea3998513d0f8a04/explorer/MartyMood/userdatas/find
-const URL = "mongodb+srv://Admin:Admin@cluster0.vl9gnuf.mongodb.net/MartyMood?retryWrites=true&w=majority";
+const URL = "<DB URL>";
 
 app.use('/storage', express.static('Storage'));
 

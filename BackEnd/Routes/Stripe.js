@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Stripe = require('stripe')
-const stripe = Stripe('sk_test_51LmVQ4EtvWEzIuymCjxY7y8ahmW9TTwLTQHp0SQKoh6gvcKD0FNaeyhuCDzp1icWKu0oU2uOiVmhEN9ozjA8oh5D00zExl7kZK')
+const stripe = Stripe(process.env.STRIPE_API)
 const baseUrl = process.env.BASE_URL || `http://localhost:8000`
 const Order = require('../model/orderSchema');
 
